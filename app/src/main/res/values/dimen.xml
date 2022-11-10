@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Fonts -->
+    <dimen name="font_title">27sp</dimen>
+    <dimen name="font_body">20sp</dimen>
+    <dimen name="font_body_medium">15dp</dimen>
+    <dimen name="font_body_small">13sp</dimen>
+    <dimen name="font_body_extra_small">10dp</dimen>
+    <dimen name="font_value">35sp</dimen>
+    <dimen name="font_score">30dp</dimen>
+
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+</resources>
