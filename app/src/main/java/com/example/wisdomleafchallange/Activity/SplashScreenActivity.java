@@ -15,7 +15,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         showSplashScreen();
     }
 
@@ -25,7 +24,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         //This method is used so that your splash activity
         //can cover the entire screen.
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash_screen);
         //this will bind your MainActivity.class file with activity_main.
 
         new Handler().postDelayed(new Runnable() {

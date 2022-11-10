@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.example.wisdomleafchallange"
         minSdk 21
-        targetSdk 31
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -37,7 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation 'com.squareup.retrofit:retrofit:1.9.0'
     // dependency for Retrofitimplementation
-    implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-    implementation 'com.jakewharton.retrofit:retrofit1-okhttp3-client:1.0.2'
+    implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.jakewharton.retrofit:retrofit1-okhttp3-client:1.1.0'
 }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Wisdomleaf challange</string>
+    <string name="error_alert_heading">Wisdom Technologies</string>
+    <string name="error_network_unavailable">Unfortunately there is no network connection available. Please turn on your mobile data or enable Wi-Fi to connect.</string>
+    <string name="ok">Ok</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="no_data_available">No data Available</string>
 </resources>

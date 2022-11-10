@@ -6,13 +6,6 @@ public class PicSumPresentation {
 
     private List<PicSumDataModel> ResponseData;
 
-    public PicSumPresentation(List<PicSumDataModel> responseData) {
-        ResponseData = responseData;
-    }
-
-    public PicSumPresentation() {
-    }
-
     public List<PicSumDataModel> getResponseData() {
         return ResponseData;
     }
