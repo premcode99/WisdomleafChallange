@@ -1,10 +1,14 @@
 package com.example.wisdomleafchallange.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     ArrayList<PicSumDataModel> postsList = new ArrayList<>();
     WisdomAdapter adapter;
-    int pageNum = 0, itemsCount=20, totalNoOfPages=20;
+    int pageNum = 0, itemsCount, totalNoOfPages=20;
     boolean isLoading = false;
-    int prevPageNum = 0;
+    int prevPageNum = -1;
     int errorCount = 0;
     public ProgressDialog progressDialog;
+    Toolbar toolbar;
 
 
     @Override
@@ -42,12 +47,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         wisdomRecyclerView = findViewById(R.id.wisdom_recyclerView);
         progressDialog = new ProgressDialog(MainActivity.this);
         linearLayoutManager = new LinearLayoutManager(this);
         wisdomRecyclerView.setLayoutManager(linearLayoutManager);
+        setAdapter();
         fetchWisdomPicDetails(pageNum);
-
         wisdomRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -73,6 +80,29 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.refresh_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handling action bar item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.refresh_menu) {
+            postsList.clear();
+            adapter.notifyDataSetChanged();
+            pageNum = 0;
+            prevPageNum = -1;
+            fetchWisdomPicDetails(pageNum);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void fetchWisdomPicDetails(int pageNum) {
         isLoading = true;
@@ -92,9 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 isLoading = false;
                 if (presentation != null && presentation.size() > 0) {
-                    postsList.addAll(presentation);
-                    adapter = new WisdomAdapter(postsList, MainActivity.this);
-                    wisdomRecyclerView.setAdapter(adapter);
+                    itemsCount = presentation.size();
                     inflateUI(presentation);
                 } else{
                     errorCount++;
@@ -119,15 +147,19 @@ public class MainActivity extends AppCompatActivity {
                 if(pageNum == 1)
                     UiUtils.showAlert(this, getResources().getString(R.string.error_alert_heading), getString(R.string.no_data_available));
             } else {
-                ArrayList<PicSumDataModel> list = presentation;
                 if(pageNum != prevPageNum) {
-                    postsList.addAll(list);
+                    postsList.addAll(presentation);
                     adapter.notifyDataSetChanged();
                 }
                 prevPageNum = pageNum;
                 errorCount = 0;
                 pageNum++;
             }
+    }
+
+    public void setAdapter(){
+        adapter = new WisdomAdapter(postsList, MainActivity.this);
+        wisdomRecyclerView.setAdapter(adapter);
     }
 
 
